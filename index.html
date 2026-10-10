@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>職場熱愛 LOJ 互動學習</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f4f6fa;--surf:#fff;--ink:#16213a;--mute:#5b6479;--line:#d9deea;--p:#c2185b;--i:#0f8b8d;--c:#c98a00;--ok:#1b7f4b;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1524;--surf:#182036;--ink:#e8ecf6;--mute:#9aa4bd;--line:#2a3452;--p:#f06292;--i:#3cc4c6;--c:#f0b429;--ok:#5fd18f;--bad:#ff8a80}}
+:root[data-theme="dark"]{--bg:#0f1524;--surf:#182036;--ink:#e8ecf6;--mute:#9aa4bd;--line:#2a3452;--p:#f06292;--i:#3cc4c6;--c:#f0b429;--ok:#5fd18f;--bad:#ff8a80}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans TC",system-ui,sans-serif}
+h1,h2,h3{font-family:"Noto Serif TC",Georgia,serif;line-height:1.35;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+header{padding:40px 0 20px}
+h1{font-size:clamp(28px,6vw,44px);font-weight:900}
+h1 span:nth-child(1){color:var(--p)}h1 span:nth-child(2){color:var(--i)}h1 span:nth-child(3){color:var(--c)}
+.sub{color:var(--mute);margin:10px 0 0;max-width:34em}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav button{background:none;border:0;border-bottom:3px solid transparent;color:var(--mute);font:inherit;font-weight:500;padding:12px 14px;cursor:pointer}
+nav button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--i);outline-offset:2px}
+section{display:none;padding:26px 0 60px}section.on{display:block}
+h2{font-size:24px;margin-bottom:6px}
+.lead{color:var(--mute);margin:0 0 18px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--surf);color:var(--ink);font:inherit;border-radius:999px;padding:7px 15px;cursor:pointer}
+.chip[aria-pressed=true],.chip.sel{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.p[aria-pressed=true]{background:var(--p);border-color:var(--p);color:#fff}
+.chip.i[aria-pressed=true]{background:var(--i);border-color:var(--i);color:#fff}
+.chip.c[aria-pressed=true]{background:var(--c);border-color:var(--c);color:#fff}
+svg text{font-family:inherit}
+.tri{display:block;margin:0 auto;max-width:340px;width:100%}
+.res{min-height:5.5em}
+.res b{font-family:"Noto Serif TC",serif;font-size:18px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+@media(max-width:520px){.vs{grid-template-columns:1fr}}
+.vs div{border-radius:8px;padding:12px 14px;border:1px solid var(--line)}
+.vs .a{border-left:5px solid var(--i)}.vs .b{border-left:5px solid var(--mute)}
+.vs small{color:var(--mute);display:block}
+.stage{border-left:3px solid var(--line);padding:2px 0 2px 16px;margin:0 0 6px;cursor:pointer}
+.stage.on{border-color:var(--i)}
+.stage h3{font-size:17px}
+.stage p{display:none;margin:6px 0 10px;color:var(--mute)}
+.stage.on p{display:block}
+.bar{display:grid;grid-template-columns:5.5em 1fr 3.6em;gap:10px;align-items:center;margin:10px 0;font-size:15px}
+.track{background:var(--line);border-radius:6px;height:22px;overflow:hidden}
+.fill{height:100%;border-radius:6px;transition:width .5s}
+.lg{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;background:var(--surf);border:1.5px solid var(--line);border-radius:8px;color:var(--ink);font:inherit;padding:11px 14px;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--surf))}
+.opt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,var(--surf))}
+.next{margin-top:10px;background:var(--ink);color:var(--bg);border:0;border-radius:8px;font:inherit;padding:9px 18px;cursor:pointer}
+.warn{border-left:5px solid var(--bad)}
+.theme{float:right;margin-top:14px}
+.en{color:var(--mute);font-size:14px;display:block}
+.ctb{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+.ctb th,.ctb td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.ctb th{color:var(--mute);font-weight:500}
+.scale{display:flex;gap:6px;margin-top:10px}
+.scale .chip{flex:1;padding:7px 0;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<button class="chip theme" id="th" aria-label="切換深淺色">深淺色</button>
+<h1>職場熱愛<br><span>激情</span>・<span>親密</span>・<span>承諾</span></h1>
+<p class="sub">Love of the Job（LOJ）：把史坦伯格的愛情三元論搬進職場。點選、切換、自測、答題，一步步弄懂它。</p><p class="sub" style="font-size:14px">整理自 Inness et al. (2026)，<i>Human Resource Management</i>，65, 925–948。已對照原文校正。</p>
+</header>
+</div>
+<nav><div class="wrap" role="tablist" id="tabs"></div></nav>
+<main class="wrap">
+
+<section id="s0">
+<h2>三元結構</h2>
+<p class="lead">LOJ 由三個要素組成。切換它們，看看哪些組合才算完整的熱愛。</p>
+<div class="card">
+<svg class="tri" viewBox="0 0 340 280" role="img" aria-label="LOJ 三角形">
+<polygon id="tg" points="170,40 50,235 290,235" fill="none" stroke="var(--line)" stroke-width="3"/>
+<circle id="cp" cx="170" cy="40" r="22" /><circle id="ci" cx="50" cy="235" r="22"/><circle id="cc" cx="290" cy="235" r="22"/>
+<text x="170" y="22" text-anchor="middle" fill="var(--ink)" font-size="15">激情</text>
+<text x="50" y="274" text-anchor="middle" fill="var(--ink)" font-size="15">非浪漫親密感</text>
+<text x="290" y="274" text-anchor="middle" fill="var(--ink)" font-size="15">承諾</text>
+<text id="ct" x="170" y="185" text-anchor="middle" fill="var(--ink)" font-size="22" font-weight="700"></text>
+</svg>
+<div class="row" style="justify-content:center;margin-top:10px">
+<button class="chip p" data-k="p" aria-pressed="true">激情</button>
+<button class="chip i" data-k="i" aria-pressed="true">親密感</button>
+<button class="chip c" data-k="c" aria-pressed="true">承諾</button>
+</div>
+<div class="res" id="res" style="margin-top:14px" aria-live="polite"></div>
+</div>
+<div class="card"><b>定義</b><br>職場熱愛（Love of the Job, LOJ）是一種高階、整體性的情感依戀（profound emotional attachment），把對<b>工作任務的激情</b>、與<b>同事的非浪漫親密感</b>、對<b>組織的承諾</b>交織在一起。理論借自史坦伯格的愛情三元論（1986, 1987），把人際間的「圓滿之愛」轉到職場。「非浪漫」是指排除浪漫與性吸引力。它關注員工整體的心理蓬勃發展（human flourishing），而不只是被動評價或短期投入。<br>三個開關的八種組合說明是本站為示範而寫的；論文只定義三者同時高的完整形式，並建議未來用潛在剖面分析找出實際出現的組合。</div>
+<div class="card"><b>為什麼是「工作」而不是「職涯」？</b><br>LOJ 綁定具體的工作，也就是任務、同事與組織身分的總和。你可以熱愛醫療專業，卻討厭現在的醫院；也可能愛上這份職務與團隊，卻對整個行業沒有執念。</div>
+</section>
+
+<section id="s1">
+<h2>它和什麼不一樣？</h2>
+<p class="lead">選一個相近概念，看 LOJ 在哪裡不同。</p>
+<div class="row" id="cmpb"></div>
+<div class="vs" id="cmp"></div>
+<div id="ctb"></div>
+<div class="card" style="margin-top:18px"><b>實證佐證</b><br>控制正向情感後，LOJ 與工作狂的淨相關為 <i>r<sub>p</sub></i> = 0.02，與服從型公民行為為 −0.04 與 −0.06，皆不顯著。熱愛不等於盲目加班或無條件服從。<br>但它和相鄰概念並非不相關：Sample 2.3 中，LOJ 與工作滿意度 <i>r</i> = .73、感情承諾 .85、工作敬業度 .72–.78、心流 .59，都低於 .90 的冗餘門檻。</div>
+</section>
+
+<section id="s2">
+<h2>研究如何驗證</h2>
+<p class="lead">4 個階段，樣本編號共 11 個，但 Sample 2.1、2.2、3.1 與其他樣本重疊，實際是 8 個獨立樣本，合計 N = 1,801。點開每個階段。</p>
+<div id="stg"></div>
+<div class="card"><b>論文自己承認的限制</b><br>變項與結果都是自陳；因果方向未定（健康或社交功能變好，也可能提高對工作的愛）；樣本主要來自英語系國家與線上研究平台；5 年追蹤只剩 124 人，且用單題測量工作滿意度與敬業度。零工、部分工時與跨文化情境尚未檢驗。</div>
+</section>
+
+<section id="s3">
+<h2>LOJ 預測了什麼</h2>
+<p class="lead">相對權重分析（Sample 4.1，N = 506）：每項結果的已解釋變異，由四個預測因子分攤的比例。</p>
+<div class="card">
+<div class="row" id="fl" style="margin-bottom:8px"></div>
+<div id="bars"></div>
+<p style="margin:12px 0 0;font-size:14px;color:var(--mute)"><span class="lg" style="background:var(--i)"></span>LOJ　<span class="lg" style="background:var(--c)"></span>工作滿意度　<span class="lg" style="background:var(--p)"></span>工作敬業度　<span class="lg" style="background:var(--mute)"></span>正向情感</p>
+</div>
+<div class="card"><b>5 年追蹤（Sample 3.3，N = 124）</b><br>LOJ 增加，能預測焦慮憂鬱、社交功能障礙與離職傾向下降（ΔR² 皆為 .02，樣本小，效果量不大）。睡眠、頭痛與腸胃不適等身體症狀是在 Sample 4.1（兩週後再測）測量的，不在 5 年追蹤裡。</div>
+<div class="card warn"><b>讀圖前的三個提醒</b><br>1. 占比是占「已解釋變異」的比例，不是占全部變異。實體健康的模型 R² 只有 .03，所以 56.06% 的實際份量很小。<br>2. 相對權重只顯示貢獻大小，不顯示方向。Table 9 中，LOJ 與部分缺勤（r = .22）、身體症狀分數（r = .15）都是正相關，而依方法段落，這兩個量表都是分數越高、缺勤或症狀越多（論文未說明有反向計分）。論文文字卻解讀為缺勤減少、健康較好，兩者互相矛盾，建議對照補充資料確認。<br>3. 論文內文中離職傾向與部分缺勤的部分百分比，和 Table 10 不一致。本站採用 Table 10。</div>
+</section>
+
+<section id="s4">
+<h2>HR 怎麼用</h2>
+<p class="lead">對應三個要素的介入方式，可整合進高績效工作實務（HPWP）。</p>
+<div class="row" id="hrb"></div>
+<div class="card" id="hr" aria-live="polite"></div>
+<div class="card warn"><b>小心「武器化激情」</b><br>論文以「過猶不及」理論推測：極高的 LOJ 可能變成理想化、過度投入、忍受不良條件，甚至產生道德盲點。這點尚未實證檢驗，列為未來研究。HR 要防止組織把員工的熱愛當成剝削的理由。</div>
+<div class="card"><b>診斷用法：脈搏調查</b><br>把 9 題量表放進離職面談或脈搏調查，低分可能是心離或離職風險的早期警訊。也可以檢視培養激情、親密與承諾的機會，是否在不同角色與族群間公平分配。</div>
+<div class="card warn"><b>待查證：部分缺勤</b><br>論文文字說 LOJ 與較少的部分缺勤（遲到、早退、延長休息）有關，且相對權重分析占比居首（45.16%，模型 R² = .07）。但 Table 9 顯示 LOJ 與部分缺勤為正相關（r = .22）。另一份非論文原文的整理，把它解讀為高 LOJ 員工的彈性調整與微休息，是可能的解釋之一。論文沒有清楚交代方向，引用時請保守。</div>
+</section>
+
+<section id="sa0">
+<h2>量表自測</h2>
+<p class="lead">LOJ 9 題量表，中英對照。依論文附錄的 5 點量表作答：1 = 非常輕微，2 = 有一點，3 = 中等，4 = 相當多，5 = 極度。這是學習用的體驗，不是診斷。</p>
+<div id="sa"></div>
+<div class="card" id="sr" aria-live="polite"></div>
+</section>
+
+<section id="s5">
+<h2>小測驗</h2>
+<p class="lead" id="qp"></p>
+<div class="card" id="q"></div>
+</section>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const tabs=["三元結構","概念比較","研究歷程","預測力","HR 應用","量表自測","小測驗"];
+tabs.forEach((t,n)=>{const b=document.createElement("button");b.textContent=t;b.setAttribute("role","tab");b.onclick=()=>go(n);$("#tabs").append(b)});
+function go(n){document.querySelectorAll("section").forEach((s,j)=>s.classList.toggle("on",j==n));
+document.querySelectorAll("#tabs button").forEach((b,j)=>b.setAttribute("aria-selected",j==n));window.scrollTo(0,0)}
+go(0);
+$("#th").onclick=()=>{const r=document.documentElement,d=(r.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))=="dark";r.dataset.theme=d?"light":"dark"};
+
+/* triangle */
+const on={p:1,i:1,c:1},col={p:"var(--p)",i:"var(--i)",c:"var(--c)"},id={p:"cp",i:"ci",c:"cc"};
+const prof={
+"111":["完整的職場熱愛","對任務有激情、與同事親近、對組織與角色有承諾，三者相互強化。這才是高階、完整的 LOJ。"],
+"000":["沒有依戀","三個要素都缺，工作只剩經濟交換。"],
+"100":["只有激情","熱愛任務本身，但缺乏同事關係與長期投入。論文舉例：自由工作者可能有激情，卻少有承諾與親密感。"],
+"010":["只有親密感","喜歡同事，卻對工作內容沒感覺，也沒有長期打算。"],
+"001":["只有承諾","對組織有承諾，但缺少激情與同事間的親近感。論文舉例：遠距工作者可能有承諾，卻難以維持親密感。"],
+"110":["缺承諾","有熱情也有好同事，但對組織沒有承諾。"],
+"101":["缺親密感","熱愛任務也願意長期投入，但與同事關係疏離。"],
+"011":["缺激情","和同事親近、也願意留下，但工作本身已無火花。"]};
+function tri(){const k=""+on.p+on.i+on.c;for(const x in on){const c=$("#"+id[x]);c.setAttribute("fill",on[x]?col[x]:"var(--line)")}
+$("#tg").setAttribute("stroke",k=="111"?"var(--ink)":"var(--line)");
+$("#ct").textContent=k=="111"?"LOJ":"";
+const[a,b]=prof[k];$("#res").innerHTML="<b>"+a+"</b><br>"+b}
+document.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const k=b.dataset.k;on[k]^=1;b.setAttribute("aria-pressed",!!on[k]);tri()});tri();
+
+/* compare */
+const cm={
+"工作滿意度":["主動、內在、深層情感連結的持久取向","認知性、評價性的評估（薪酬、工時、福利），較被動","員工可能對條件不滿，卻依然深愛工作。"],
+"工作敬業度":["持久的情感紐帶，整合同事親密感與組織歸屬","執行任務時的精力與短暫專注（活力、奉獻、吸收）",""],
+"感情承諾":["激情、親密、承諾三位一體的整體依戀","只指向組織單一焦點，渴望留在公司","組織承諾再高，缺了任務激情或同事親密，也不算 LOJ。"],
+"心流":["穩定且跨越時間的心理架構","任務中一時的最佳沉浸體驗，活動結束就消失",""],
+"工作狂":["健康、滋養自我認同、動機正向","強迫、不良適應、帶有焦慮的工作衝動","實證上兩者幾乎無關（控制正向情感後 rp = 0.02）。"]};
+const cx={"工作滿意度":["工作環境與條件評價","被動認知評估（按條件打分）","具反應性：看工作是否符合當下的需求與期待","離職傾向 61.94%、焦慮 58.14%（占 R² 比例）"],"工作敬業度":["任務執行的精力與專注","短期動能與專注","短期、情境式狀態","憂鬱 33.85%（占 R² 比例，LOJ 為 10.64%）"],"感情承諾":["組織歸屬與認同","對組織的情感性連結，想維持成員身分","長期傾向","未納入相對權重分析"],"心流":["瞬間的完全沉浸狀態","沉浸於內在有趣的活動","瞬間、事件式","未納入相對權重分析"]};
+const cl=["整合任務、同事與組織","主動內在的情感投射","持久的情感紐帶","OCB、部分缺勤、實體健康（占 R² 比例最大）"],rl=["核心焦點","心理機制","時間屬性","預測優勢"];
+function tbl(k){const x=cx[k];$("#ctb").innerHTML=x?`<div style="overflow-x:auto"><table class="ctb"><tr><th></th><th>LOJ</th><th>${k}</th></tr>${rl.map((r,n)=>`<tr><th>${r}</th><td>${cl[n]}</td><td>${x[n]}</td></tr>`).join("")}</table></div>`:""}
+const cb=$("#cmpb");Object.keys(cm).forEach((k,n)=>{const b=document.createElement("button");b.className="chip";b.textContent=k;b.onclick=()=>{cb.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");const[a,c,n2]=cm[k];tbl(k);$("#cmp").innerHTML=`<div class="a"><small>LOJ</small>${a}</div><div class="b"><small>${k}</small>${c}</div>${n2?`<p style="grid-column:1/-1;margin:0;color:var(--mute)">${n2}</p>`:""}`};cb.append(b);if(!n)b.click()});
+
+/* stages */
+const sg=[
+["階段 1：題目生成與結構確認","10 位專家產生 86 句陳述，去除重複後剩 83 題；8 位專家評分，依變異係數（CV ≤ 26%）刪掉 39 題，留下 44 題。探索性因素分析（Sample 1.2，N = 403）抽出三因素，每因素取負荷最高的 3 題，成為 9 題量表。內容效度（Sample 1.3，N = 114）：htc = 0.86–0.91、htd = 0.30–0.53。驗證性因素分析（Sample 1.4，N = 217）：單因素 CFI = 0.67、雙因素 0.89；三因素與高階模型擬合相當，皆為 CFI = 0.99、TLI = 0.98、RMSEA = 0.06。高階負荷：激情 .91、承諾 .82、親密感 .65。"],
+["階段 2：同時與區別效度","三個樣本（N = 171、217、338）。控制正向情感後，LOJ 與工作滿意度（rp = .55–.58）、同事滿意度（.29–.40）、OCB 忠誠與參與正相關，與離職傾向（rp = −.48）負相關；與服從型 OCB（−.04、−.06）、工作狂（.02）無顯著關聯。組織偏離行為也不顯著（−.02），和研究預期的負相關不同。Sample 2.3（一週後）：與 OCB .52、創新 .44、工作塑型 .67、工作疏忽 −.36 相關。"],
+["階段 3：預測與增額效度","1 週（Sample 3.1，N = 338）：28 組階層迴歸中，24 組顯示 LOJ 有增額效度；工作塑型、創新、OCB 最穩定，工作疏忽較不一致（控制三種敬業度或感情承諾後不顯著）。2 個月（Sample 3.2，N = 86）：預測較低的離職傾向（ΔR² = .03）與較高的對組織 OCB（ΔR² = .04），對指向他人的 OCB 不顯著。5 年（Sample 3.3，N = 124）：T2 的 LOJ 預測較低的焦慮憂鬱、社交功能障礙與離職傾向（ΔR² 皆為 .02）。此樣本因行政失誤只用了 9 題中的 7 題（缺第 2、9 題）。"],
+["階段 4：相對重要性","Qualtrics 樣本（N = 506），兩週後再測。用相對權重分析比較 LOJ、工作滿意度、工作敬業度與正向情感，各占模型 R² 的比例。留意各結果的 R² 本身差異很大，詳見預測力分頁。"]];
+sg.forEach((s,n)=>{const d=document.createElement("div");d.className="stage"+(n?"":" on");d.tabIndex=0;d.innerHTML=`<h3>${s[0]}</h3><p>${s[1]}</p>`;
+const t=()=>d.classList.toggle("on");d.onclick=t;d.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();t()}};$("#stg").append(d)});
+
+/* RWA */
+const rw=[["對組織的 OCB（OCBO）",".17",[41.96,14.86,18.58,24.60],"27.10–56.45"],["對他人的 OCB（OCBP）",".14",[32.90,18.94,22.06,26.09],"18.58–47.64"],["實體健康",".03",[56.06,14.26,7.67,22.02],"20.08–75.19"],["部分缺勤",".07",[45.16,15.76,25.51,13.57],"24.82–66.65"],["離職傾向",".14",[20.76,61.94,12.27,5.03],"10.10–35.01"],["焦慮",".04",[30.72,58.14,4.13,7.01],"8.10–60.25"],["憂鬱",".24",[10.64,30.81,33.85,24.70],"8.72–14.81"]];
+let flt="all";
+const PN=["LOJ","工作滿意度","工作敬業度","正向情感"],PC=["i","c","p","mute"];
+function bars(){$("#bars").innerHTML=rw.filter(r=>{const t=r[2].indexOf(Math.max(...r[2]));return flt=="all"||(flt=="L")==(t==0)}).map(r=>`<div style="margin:16px 0"><b>${r[0]}</b> <span style="color:var(--mute);font-size:14px">模型 R² = ${r[1]}</span><div class="track" style="display:flex;height:26px;margin:6px 0">${r[2].map((v,j)=>`<div style="width:${v}%;background:var(--${PC[j]})" title="${PN[j]} ${v}%"></div>`).join("")}</div><div style="font-size:14px;color:var(--mute)">${r[2].map((v,j)=>PN[j]+" "+v+"%").join("｜")}</div><div style="font-size:13px;color:var(--mute)">LOJ 的 95% 信賴區間：${r[3]}%</div></div>`).join("")}
+[["all","全部"],["L","LOJ 居首"],["S","其他因子居首"]].forEach(([k,t],n)=>{const b=document.createElement("button");b.className="chip"+(n?"":" sel");b.textContent=t;b.onclick=()=>{flt=k;document.querySelectorAll("#fl button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");bars()};$("#fl").append(b)});bars();
+
+/* HR */
+const hr={"激情":["工作設計","工作豐富化與內部流動，維持對任務的激情。"],"親密感":["高品質連結","團隊結構、導師制度，以及刻意安排的高品質連結機會，培養非浪漫親密感。"],"承諾":["透明認可","透明的目標設定與認可，支持對組織的承諾。"]};
+Object.keys(hr).forEach((k,n)=>{const b=document.createElement("button");b.className="chip"+(n?"":" sel");b.textContent=k;b.onclick=()=>{document.querySelectorAll("#hrb button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");show(k)};$("#hrb").append(b)});
+function show(k){$("#hr").innerHTML=`<b>${hr[k][0]}</b><br>${hr[k][1]}`}show("激情");
+
+/* quiz */
+const Q=[
+["LOJ 的三個要素是什麼？",["激情、非浪漫親密感、承諾","滿意、敬業、忠誠","活力、奉獻、吸收","認知、情感、行為"],0,"LOJ 引申自史坦伯格愛情三元論。"],
+["LOJ 與感情承諾最大的差別是？",["LOJ 只看薪水","感情承諾只指向組織單一焦點，LOJ 是三位一體的整體依戀","兩者完全相同","感情承諾只看同事"],1,"組織承諾高，仍可能缺少任務激情或同事親密。"],
+["LOJ 與工作狂的關係？",["高度正相關","顯著負相關","幾乎無關（rp = 0.02）","工作狂是 LOJ 的一部分"],2,"工作狂是強迫性衝動，LOJ 是健康的情感投入。"],
+["預測「實體健康」時，哪個因子相對貢獻最大？",["工作滿意度","LOJ（56.06%）","工作敬業度","積極情感"],1,"LOJ 占已解釋變異的 56.06%，但實體健康的模型 R² 只有 .03，整體解釋力很小。"],
+["「武器化激情」指的是？",["員工太熱愛而升遷","組織把員工的熱愛轉成過度剝削","同事間競爭","遠距工作的孤立"],1,"HR 需公平分配情感資源與心理支持，避免剝削。"],
+["LOJ 最終量表共幾題？",["9 題，三要素各 3 題","44 題","12 題，每要素 4 題","3 題"],0,"由 44 題精簡為 9 題，每個要素取負荷最高的 3 題。"],
+["預測離職傾向時，哪個因子相對貢獻最大？",["LOJ","工作滿意度（61.94%）","心流","工作狂"],1,"滿意度在離職傾向與焦慮上仍居首，LOJ 提供補充預測力。"]];
+let qi=0,sc=0;
+function rq(){const box=$("#q");if(qi>=Q.length){$("#qp").textContent="完成";box.innerHTML=`<b style="font-size:20px">你答對 ${sc} / ${Q.length} 題</b><br><button class="next" id="rs">重新作答</button>`;$("#rs").onclick=()=>{qi=0;sc=0;rq()};return}
+const q=Q[qi];$("#qp").textContent=`第 ${qi+1} / ${Q.length} 題`;box.innerHTML=`<b>${q[0]}</b>`;
+q[1].forEach((t,n)=>{const o=document.createElement("button");o.className="opt";o.textContent=t;o.onclick=()=>{box.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j==q[2])x.classList.add("ok")});if(n==q[2])sc++;else o.classList.add("no");
+const e=document.createElement("p");e.style.color="var(--mute)";e.textContent=(n==q[2]?"答對了。":"不太對。")+q[3];const nb=document.createElement("button");nb.className="next";nb.textContent=qi<Q.length-1?"下一題":"看結果";nb.onclick=()=>{qi++;rq()};box.append(e,nb)};box.append(o)})}
+rq();
+const IT=[["p","My work is more than a job to me, it is a passion.","對我而言，我的工作不僅僅是一份工作，更是一種激情。"],["p","I am excited to do my job each day.","每天去上班時，我都感到興奮不已。"],["p","I adore what I do at work.","我非常熱愛自己在工作中所做的一切。"],["c","I love the organization for which I work.","我深愛著我所服務的這個組織。"],["c","I really feel as if this organization's problems are my own.","我真的覺得這家公司的問題就是我自己的問題。"],["c","This organization has a great deal of personal meaning for me.","這個組織對我而言具有極大的個人意義。"],["i","I love the people I work with.","我非常熱愛與我共事的同事。"],["i","I feel very close to the people at work.","我感到與職場中的同事非常親近。"],["i","We can confide in each other at work.","在工作中，我們能夠彼此信任並向對方傾訴。"]];
+const ans=Array(9).fill(0),DN={p:"激情",i:"親密感",c:"承諾"};
+function sres(){const n=ans.filter(Boolean).length,r=$("#sr");
+if(n<9){r.innerHTML=`已回答 ${n} / 9 題`;return}
+const m={};["p","i","c"].forEach(d=>{const v=IT.map((t,j)=>t[0]==d?ans[j]:0).filter(Boolean);m[d]=v.reduce((a,b)=>a+b)/v.length});
+const tot=ans.reduce((a,b)=>a+b)/9,lo=Math.min(...Object.values(m)),ls=Object.keys(m).filter(d=>m[d]==lo);
+r.innerHTML=`<b>總平均 ${tot.toFixed(1)} / 5</b>`+["p","i","c"].map(d=>`<div class="bar"><span>${DN[d]}</span><div class="track"><div class="fill" style="width:${m[d]/5*100}%;background:var(--${d})"></div></div><b>${m[d].toFixed(1)}</b></div>`).join("")+`<p>${ls.length==3?"三個面向的分數相同。":`相對最低的是「${ls.map(d=>DN[d]).join("、")}」。HR 做法：${hr[DN[ls[0]]][1]}`}</p><p style="color:var(--mute);font-size:14px;margin:0">參考：論文 Sample 4.1（N = 506）的平均為激情 3.30、親密感 3.57、承諾 3.18、總分 3.35。論文沒有提供切分點，結果僅供自我觀察。</p>`}
+IT.forEach((t,j)=>{const d=document.createElement("div");d.className="card";d.innerHTML=`<b>${t[2]}</b><span class="en">${t[1]}（${DN[t[0]]}）</span>`;const s=document.createElement("div");s.className="scale";[1,2,3,4,5].forEach(v=>{const b=document.createElement("button");b.className="chip "+t[0];b.textContent=v;b.title=["非常輕微","有一點","中等","相當多","極度"][v-1];b.setAttribute("aria-pressed","false");b.setAttribute("aria-label",`第 ${j+1} 題，${v} 分`);b.onclick=()=>{ans[j]=v;s.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));sres()};s.append(b)});d.append(s);$("#sa").append(d)});sres();
+</script>
+</body>
+</html>
